@@ -1,59 +1,31 @@
 package com.HotelReservation;
+import java.time.LocalDate;
 
-import java.util.ArrayList;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 
+public class HotelReservationSystem {
+    public static void main(String[] args) {
+        HotelReservation hotelReservation = new HotelReservation();
+        hotelReservation.addHotel("LakeWood", 110, 90);
+        hotelReservation.addHotel("BridgeWood", 150, 50);
+        hotelReservation.addHotel("RidgeWood", 220, 150);
+        //list out hotel Details
+        hotelReservation.getHotelDetails();
 
-class Hotel{
-    public String getHotelName() {
-        return hotelName;
+        //giving start and end dates of the schedule
+        LocalDate dateStart = LocalDate.of(2021, Month.AUGUST, 11);
+        LocalDate dateEnd = LocalDate.of(2021, Month.AUGUST, 20);
+        System.out.println("Starting date : "+dateStart);
+        System.out.println("Ending date : "+dateEnd);
+        int noOfDays = (int) ChronoUnit.DAYS.between(dateStart, dateEnd);
+        System.out.println("Total days is : "+noOfDays);
+        //finding getWeekDaysCount
+        int weekEndsCount = hotelReservation.getWeekDaysCount(dateStart, noOfDays);
+        int weekDaysCount = noOfDays - weekEndsCount;
+
+        //find getMinPriceHotel
+        hotelReservation.getMinPriceHotel(weekEndsCount, weekDaysCount);
+        
     }
-    public Hotel(){};
-
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
-    }
-
-    public int getHotelPriceWeekDays() {
-        return hotelPriceWeekDays;
-    }
-
-    public void setHotelPriceWeekDays(int hotelPriceWeekDays) {
-        this.hotelPriceWeekDays = hotelPriceWeekDays;
-    }
-
-    public int getHotelPriceWeekEnds() {
-        return hotelPriceWeekEnds;
-    }
-
-    public void setHotelPriceWeekEnds(int hotelPriceWeekEnds) {
-        this.hotelPriceWeekEnds = hotelPriceWeekEnds;
-    }
-
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "hotelName='" + hotelName + '\'' +
-                ", hotelPriceWeekDays=" + hotelPriceWeekDays +
-                ", hotelPriceWeekEnds=" + hotelPriceWeekEnds +
-                '}';
-    }
-
-    private String hotelName;
-    private int hotelPriceWeekDays;
-    private int hotelPriceWeekEnds;
-
-}
-
-public class HotelReservation extends Hotel {
-    public ArrayList<Hotel> hotelDetails = new ArrayList<Hotel>();
-
-    public void addHotel(String hotelName, int hotelPriceWeekDays, int hotelPriceWeekEnds) {
-        Hotel adder = new Hotel(hotelName, hotelPriceWeekDays, hotelPriceWeekEnds);
-        hotelDetails.add(adder);
-    }
-
-    public void getHotelDetails(){
-        System.out.println(hotelDetails);
-    }
-   
 }

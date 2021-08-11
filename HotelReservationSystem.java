@@ -46,6 +46,11 @@ public class HotelReservation {
         hotelDetails.add(adder);
     }
 
+    public void getMinPriceHotel(){
+        Hotel min =  hotelDetails.stream().min(Comparator.comparing(Hotel::getHotelPrice)).orElseThrow();
+        System.out.println(min);
+    }
+
     public void getHotelDetails() {
         String hotelName1 = "LakeWood";
         String hotelName2 = "BridgeWood";
